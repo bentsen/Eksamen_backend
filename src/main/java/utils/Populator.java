@@ -1,9 +1,15 @@
 package utils;
 
+import entities.Location;
+import entities.Match;
+import entities.Player;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Populator {
     public static void main(String[] args) {
@@ -18,72 +24,72 @@ public class Populator {
             //En mand kan derfor sætte sig selv som ejer til sidst
 
             //Create Harbour Entities
-            Harbour harbour1 = new Harbour(1, "BeanHarbour", "BeanBeanStreet 42", 10);
-            Harbour harbour2 = new Harbour(2, "MeanHarbour", "MeanMeanStreet 52", 20);
-            Harbour harbour3 = new Harbour(3, "SmeenHarbour", "SmeenSmeenStreet 62", 30);
+            Location location1 = new Location("BeanBeanStreet 42", "kastrup", "god");
+            Location location2 = new Location("MeanMeanStreet 52", "glostrup", "god");
+            Location location3 = new Location("SmeenSmeenStreet 62", "københavn", "god");
             //Store Harbour Entities
-            em.persist(harbour1);
-            em.persist(harbour2);
-            em.persist(harbour3);
+            em.persist(location1);
+            em.persist(location2);
+            em.persist(location3);
             //Create Boat Entities
-            Boat boat1 = new Boat(1, "Beancedes", "Turbo", "Rouladen", "url", null);
-            Boat boat2 = new Boat(2, "Beanyota", "Cruiser", "Döneren", "url", null);
-            Boat boat3 = new Boat(3, "BeanMW", "Sejl-Skib", "FrysePizzaen", "url", null);
-            Boat boat4 = new Boat(4, "Beanrari", "4-Wheel-Bean", "Udentomat", "url", null);
-            Boat boat5 = new Boat(5, "Beanmoghini", "Cruiser", "Jiggy", "url", null);
+            Match match1 = new Match("brøndby if", "hans", "fodbold", false);
+            Match match2 = new Match("rødovre if", "hans", "fodbold", true);
+            Match match3 = new Match("fck", "torben", "fodbold",  false);
+            Match match4 = new Match("silkeborg fc", "christian", "fodbold", false);
+            Match match5 = new Match("midtjylland", "oliver", "fodbold",  false);
             //Set Boat's harbour
-            boat1.setHarbour(harbour1);
-            boat2.setHarbour(harbour1);
-            boat3.setHarbour(harbour2);
-            boat4.setHarbour(harbour3);
-            boat5.setHarbour(harbour3);
+            match1.setLocation(location1);
+            match2.setLocation(location1);
+            match3.setLocation(location2);
+            match4.setLocation(location2);
+            match5.setLocation(location3);
             //Store Boat Entities
-            em.persist(boat1);
-            em.persist(boat2);
-            em.persist(boat3);
-            em.persist(boat4);
-            em.persist(boat5);
+            em.persist(match1);
+            em.persist(match2);
+            em.persist(match3);
+            em.persist(match4);
+            em.persist(match5);
             //Create Boat List1
-            List<Boat> boatList1 = new ArrayList<>();
-            boatList1.add(boat1);
-            boatList1.add(boat2);
+            Set<Match> matches1 = new HashSet<>();
+            matches1.add(match1);
+            matches1.add(match2);
             //Create Boat List2
-            List<Boat> boatList2 = new ArrayList<>();
-            boatList2.add(boat3);
-            boatList2.add(boat4);
+            Set<Match> matches2 = new HashSet<>();
+            matches2.add(match3);
+            matches2.add(match4);
             //Create Boat List3
-            List<Boat> boatList3 = new ArrayList<>();
-            boatList3.add(boat5);
+            Set<Match> matches3 = new HashSet<>();
+            matches3.add(match5);
             //Create Owner Entity
-            Owner owner1 = new Owner(1, "Bean", "Beanvej", 22505080, boatList1);
-            Owner owner2 = new Owner(2, "BrotherBean", "Beanvej", 22505081, boatList2);
-            Owner owner3 = new Owner(3, "SisterBean", "Beanvej", 22505082, boatList3);
+            Player player1 = new Player("Bean", 22268970, "bean@gmail.com", "active");
+            Player player2 = new Player("BrotherBean", 26222879, "brotherBean@gmail.com", "active");
+            Player player3 = new Player("SisterBean", 98702226, "sisterBean@gmail.com", "active");
             //Store Owners
-            em.persist(owner1);
-            em.persist(owner2);
-            em.persist(owner3);
+            em.persist(player1);
+            em.persist(player2);
+            em.persist(player3);
             //Create Owner List1
-            List<Owner> ownerList1 = new ArrayList<>();
-            ownerList1.add(owner1);
+            Set<Player> players1 = new HashSet<>();
+            players1.add(player1);
             //Create Owner List2
-            List<Owner> ownerList2 = new ArrayList<>();
-            ownerList2.add(owner2);
+            Set<Player> players2 = new HashSet<>();
+            players2.add(player2);
             //Create Owner List3
-            List<Owner> ownerList3 = new ArrayList<>();
-            ownerList3.add(owner3);
+            Set<Player> players3 = new HashSet<>();
+            players3.add(player3);
             //Set Owners on Boats
             //StackOverFlow Debugging
-            boat1.setOwners(ownerList1);
-            boat2.setOwners(ownerList1);
-            boat3.setOwners(ownerList2);
-            boat4.setOwners(ownerList2);
-            boat5.setOwners(ownerList3);
+            match1.setPlayers(players1);
+            match2.setPlayers(players1);
+            match3.setPlayers(players2);
+            match4.setPlayers(players2);
+            match5.setPlayers(players3);
             //Update Owners on Boats
-            em.merge(boat1);
-            em.merge(boat2);
-            em.merge(boat3);
-            em.merge(boat4);
-            em.merge(boat5);
+            em.merge(match1);
+            em.merge(match2);
+            em.merge(match3);
+            em.merge(match4);
+            em.merge(match5);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("All is not good :(");

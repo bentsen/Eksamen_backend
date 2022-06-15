@@ -26,35 +26,4 @@ public class AdminResource {
     public String demo() {
         return "{\"msg\":\"Hello User\"}";
     }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("createBoat")
-    public Response createBoat(String jsonString) throws API_Exception {
-        String brand;
-        String make;
-        String name;
-        String image;
-
-        try {
-            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
-            brand = json.get("brand").getAsString();
-            make = json.get("make").getAsString();
-            name = json.get("name").getAsString();
-            image = json.get("image").getAsString();
-        } catch (Exception e) {
-            throw new API_Exception("Malformed JSON Suplied",400,e);
-        }
-
-        adminREPO.createBoat(brand,make,name,image);
-        return Response.ok().entity("Boat with these details, have been made:"
-                +"\nBrand: " + brand
-                +"\nMake: " + make
-                +"\nName: " + name
-                +"\nImage: " +image).build();
-
-    }
-
-
 }

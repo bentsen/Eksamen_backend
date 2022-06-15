@@ -19,7 +19,7 @@ public class UserResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
-    private static final OwnerRepo ownerREPO =  OwnerRepo.getRepositoryExample(EMF);
+   /* private static final OwnerRepo ownerREPO =  OwnerRepo.getRepositoryExample(EMF);
     private static final HarbourRepo harbourREPO =  HarbourRepo.getRepositoryExample(EMF);
     private static final BoatRepo boatREPO =  BoatRepo.getRepositoryExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -50,6 +50,6 @@ public class UserResource {
         //List<OwnerDTO> ownsBoat = boatREPO.ownsBoatById(id);
         BoatDTO foundBoat = boatREPO.getById(id);
         return Response.ok().entity(foundBoat.getOwners()).build();
-    }
+    }*/
 
 }
