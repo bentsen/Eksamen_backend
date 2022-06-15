@@ -1,0 +1,3 @@
+POST http://localhost:8080/boats_war_exploded/api/auth/login
+
+{"username":"user", "password":"MyPassword"}

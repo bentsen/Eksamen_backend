@@ -1,0 +1,3 @@
+POST http://localhost:8080/boats_war_exploded/api/admin/createBoat
+
+{"brand":"Mitzubishi", "make":"F15", "name":"Lynkarlen", "image":"url"}
