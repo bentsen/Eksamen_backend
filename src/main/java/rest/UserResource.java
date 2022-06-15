@@ -17,7 +17,7 @@ import java.util.List;
 @Path("info")
 public class UserResource {
 
-    /*private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final UserRepo REPO =  UserRepo.getRepo(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -81,5 +81,5 @@ public class UserResource {
 
         User user1 = UserRepo.getRepo(EMF).registerUser(user.getUserName(), user.getUserPass());
         return GSON.toJson(user1);
-    }*/
+    }
 }
