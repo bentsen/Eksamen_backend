@@ -81,7 +81,8 @@ public class MatchResource {
     @Path("/createMatch")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createBoat(String content) throws EntityNotFoundException, API_Exception {
+    @RolesAllowed("admin")
+    public Response createMatch(String content) throws EntityNotFoundException, API_Exception {
         MatchDTO matchDTO;
         MatchDTO newMatchDTO;
         try{
@@ -102,7 +103,8 @@ public class MatchResource {
     @Path("/deleteMatch/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteBoat(@PathParam("id") int id) throws EntityNotFoundException, API_Exception{
+    @RolesAllowed("admin")
+    public Response deleteMatch(@PathParam("id") int id) throws EntityNotFoundException, API_Exception{
         try {
             REPO.deleteMatch(id);
         }

@@ -1,0 +1,16 @@
+POST http://localhost:8080/sport_war_exploded/api/auth/login
+
+{"username":"admin", "password":"MyPassword"}
+
+###
+POST http://localhost:8080/sport_war_exploded/api/location/createLocation
+
+{
+  "id": 0,
+  "address": "testAddress4",
+  "city": "testCity4",
+  "condition": "testCondition4",
+  "matches": [
+    "Oppenent Team: testTeam3 judge: testjudge3 type: testType3 inDoors: false"
+  ]
+}

@@ -1,11 +1,14 @@
 package repository;
 
+import dtos.UserDTO;
 import entities.Role;
 import entities.User;
 import security.errorhandling.AuthenticationException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * @author lam@cphbusiness.dk
@@ -23,12 +26,16 @@ public class UserRepo {
      * @param _emf
      * @return the instance of this repository.
      */
-    public static UserRepo getUserRepo(EntityManagerFactory _emf) {
+    public static UserRepo getRepo(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new UserRepo();
         }
         return instance;
+    }
+
+    private EntityManager getEntityManager(){
+        return emf.createEntityManager();
     }
 
     public User getVerifiedUser(String username, String password) throws AuthenticationException {
@@ -43,6 +50,17 @@ public class UserRepo {
             em.close();
         }
         return user;
+    }
+
+    public List<UserDTO> getAllUsers() {
+        EntityManager em = getEntityManager();
+        try{
+            TypedQuery<User> query = em.createQuery("SELECT u from User u", User.class);
+            List<User> users = query.getResultList();
+            return UserDTO.getDtos(users);
+        } finally {
+            em.close();
+        }
     }
 
     public User registerUser(String username, String password) {

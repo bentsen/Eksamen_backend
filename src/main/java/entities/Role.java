@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "roles")
+@NamedQuery(name = "role.deleteAllRows", query = "DELETE from Role")
 public class Role implements Serializable {
     public static class RoleNames {
         public static final String USER = "user";

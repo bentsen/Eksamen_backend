@@ -2,54 +2,84 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.UserDTO;
+import entities.User;
+import repository.UserRepo;
 import utils.EMF_Creator;
 
+import javax.annotation.security.RolesAllowed;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import java.util.List;
 
-@Path("user")
+@Path("info")
 public class UserResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-
-   /* private static final OwnerRepo ownerREPO =  OwnerRepo.getRepositoryExample(EMF);
-    private static final HarbourRepo harbourREPO =  HarbourRepo.getRepositoryExample(EMF);
-    private static final BoatRepo boatREPO =  BoatRepo.getRepositoryExample(EMF);
+    private static final UserRepo REPO =  UserRepo.getRepo(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    @Context
+    private UriInfo context;
+    @Context
+    SecurityContext securityContext;
+
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String demo() {
-        return "{\"msg\":\"Hello User\"}";
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/")
+    public Response allUsers() {
+        List<UserDTO> userDTO;
+
+        userDTO = REPO.getAllUsers();
+
+        return Response
+                .ok()
+                .entity(GSON.toJson(userDTO))
+                .build();
     }
 
     @GET
-    @Path("allOwners")
-    public Response getAllOwners() throws EntityNotFoundException {
-        List<OwnerDTO> ownerDTOList = ownerREPO.getAllOwners();
-        return Response.ok().entity(ownerDTOList).build();
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("user")
+    @RolesAllowed({"user"})
+    public String getFromUser() {
+        String thisuser = securityContext.getUserPrincipal().getName();
+        return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
     }
 
     @GET
-    @Path("harbourBoats/{id}")
-    public Response harbourBoats(@PathParam("id") int id) throws EntityNotFoundException {
-        List<BoatDTO> boatDTOList = harbourREPO.getAllBoatsInHarbour(id);
-        return Response.ok().entity(boatDTOList).build();
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("admin")
+    @RolesAllowed("admin")
+    public String getFromAdmin() {
+        String thisuser = securityContext.getUserPrincipal().getName();
+        return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
     }
 
     @GET
-    @Path("ownsBoat/{id}")
-    public Response ownsBoatById(@PathParam("id") int id) throws EntityNotFoundException {
-        //List<OwnerDTO> ownsBoat = boatREPO.ownsBoatById(id);
-        BoatDTO foundBoat = boatREPO.getById(id);
-        return Response.ok().entity(foundBoat.getOwners()).build();
-    }*/
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/userInfo")
+    @RolesAllowed({"user", "admin"})
+    public String getUserName() {
+        String thisuser = securityContext.getUserPrincipal().getName();
+        EntityManager em = EMF.createEntityManager();
+        User currenUser = em.find(User.class, thisuser);
+        UserDTO userDTO = new UserDTO(currenUser);
+        return GSON.toJson(userDTO);
+    }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("newuser")
+    public String addNewUser(String data) {
+        System.out.println("data" + data);
+        UserDTO userDTO = GSON.fromJson(data, UserDTO.class);
+        User user = userDTO.toUser();
+
+        User user1 = UserRepo.getRepo(EMF).registerUser(user.getUserName(), user.getUserPass());
+        return GSON.toJson(user1);
+    }
 }

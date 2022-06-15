@@ -1,7 +1,6 @@
 package repository;
 
 import dtos.MatchDTO;
-import dtos.PlayerDTO;
 import entities.Location;
 import entities.Match;
 import entities.Player;

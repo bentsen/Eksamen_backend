@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NamedQuery(name = "user.deleteAllRows", query = "DELETE from User")
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
