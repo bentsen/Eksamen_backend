@@ -1,7 +1,6 @@
 package repository;
 
 import dtos.OwnerDTO;
-import entities.Owner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

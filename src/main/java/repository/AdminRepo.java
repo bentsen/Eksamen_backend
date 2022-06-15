@@ -1,14 +1,8 @@
 package repository;
 
 import dtos.BoatDTO;
-import dtos.OwnerDTO;
-import entities.Boat;
-import entities.Harbour;
-import entities.Owner;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdminRepo {
 

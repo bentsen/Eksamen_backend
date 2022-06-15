@@ -1,7 +1,5 @@
 package dtos;
 
-import entities.Boat;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,9 +1,5 @@
 package utils;
 
-import entities.Boat;
-import entities.Harbour;
-import entities.Owner;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
