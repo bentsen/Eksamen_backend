@@ -2,11 +2,6 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dtos.BoatDTO;
-import dtos.OwnerDTO;
-import repository.BoatRepo;
-import repository.HarbourRepo;
-import repository.OwnerRepo;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManagerFactory;

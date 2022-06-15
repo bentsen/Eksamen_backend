@@ -4,22 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import dtos.BoatDTO;
-import dtos.OwnerDTO;
 import errorhandling.API_Exception;
 import repository.AdminRepo;
-import repository.BoatRepo;
-import repository.HarbourRepo;
-import repository.OwnerRepo;
 import utils.EMF_Creator;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("admin")
 public class AdminResource {
