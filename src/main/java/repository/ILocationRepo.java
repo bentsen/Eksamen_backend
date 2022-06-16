@@ -1,6 +1,7 @@
 package repository;
 
 import dtos.LocationDTO;
+import dtos.MatchDTO;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

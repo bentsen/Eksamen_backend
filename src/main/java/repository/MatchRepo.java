@@ -4,6 +4,7 @@ import dtos.MatchDTO;
 import entities.Location;
 import entities.Match;
 import entities.Player;
+import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MatchRepo implements IMatchRepo{
 
@@ -114,11 +116,6 @@ public class MatchRepo implements IMatchRepo{
         } finally {
             em.close();
         }
-    }
-
-    @Override
-    public MatchDTO updateAllMatches(int id, MatchDTO matchDTO) throws IOException, URISyntaxException {
-        return null;
     }
 
     @Override

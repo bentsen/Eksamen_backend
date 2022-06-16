@@ -13,6 +13,5 @@ public interface IMatchRepo {
     void deleteMatch(int id) throws IOException, URISyntaxException;
     MatchDTO createMatch(MatchDTO matchDTO) throws IOException, URISyntaxException;
     MatchDTO updateMatch(int id, MatchDTO matchDTO) throws IOException, URISyntaxException;
-    MatchDTO updateAllMatches(int id, MatchDTO matchDTO) throws IOException, URISyntaxException;
     MatchDTO connectMatchToLocation(int matchId, int locationId) throws IOException, URISyntaxException;
 }

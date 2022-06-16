@@ -28,7 +28,7 @@ public class User implements Serializable {
   @JoinTable(name = "user_roles", joinColumns = {
     @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
-  @ManyToMany(cascade = CascadeType.PERSIST)
+  @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
   public List<String> getRolesAsStrings() {
@@ -40,6 +40,13 @@ public class User implements Serializable {
         rolesAsStrings.add(role.getRoleName());
       });
     return rolesAsStrings;
+  }
+
+  public String getRole() {
+    if(roleList.isEmpty()) {
+      return null;
+    }
+    return roleList.get(0).getRoleName();
   }
 
   public User() {}
