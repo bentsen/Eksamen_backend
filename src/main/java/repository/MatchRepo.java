@@ -117,21 +117,4 @@ public class MatchRepo implements IMatchRepo{
             em.close();
         }
     }
-
-    @Override
-    public MatchDTO connectMatchToLocation(int matchId, int locationId) throws IOException, URISyntaxException {
-        EntityManager em = getEntityManager();
-        try{
-            Match match = em.find(Match.class, matchId);
-            Location location = em.find(Location.class, locationId);
-            match.setLocation(location);
-
-            em.getTransaction().begin();
-            em.merge(match);
-            em.getTransaction().commit();
-            return new MatchDTO(match);
-        } finally {
-            em.close();
-        }
-    }
 }
