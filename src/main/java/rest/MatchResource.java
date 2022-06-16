@@ -138,18 +138,4 @@ public class MatchResource {
                 .entity(GSON.toJson(newMatchDTO))
                 .build();
     }
-
-    @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/location/{locationID}/{matchID}")
-    @RolesAllowed("admin")
-    public String connectLocation(@PathParam("locationID") int locationID, @PathParam("matchID") int matchID) throws API_Exception {
-        try{
-            MatchDTO matchDTO = REPO.connectMatchToLocation(matchID,locationID);
-            return GSON.toJson(matchDTO);
-        } catch (IOException | URISyntaxException e) {
-            throw new API_Exception("Match Not Found", 404, e);
-        }
-    }
 }
